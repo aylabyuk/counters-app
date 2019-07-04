@@ -7,11 +7,15 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
     ]
   },
   "scripts": {
-    "start": "webpack && node index.js",
+    "start": "node index.js",
     "dev": "webpack-dev-server --open",
+    "build": "webpack",
     "clean": "rimraf static"
   },
   "keywords": [
@@ -20,6 +24,7 @@
   "author": "Virtual Control",
   "license": "ISC",
   "dependencies": {
+    "antd": "^3.20.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "express": "^4.17.0",
@@ -30,6 +35,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
