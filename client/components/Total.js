@@ -10,7 +10,7 @@ const CounterContainer = () => {
         justifyContent: "space-between",
         width: "100%",
         fontSize: "2em",
-        border: "1px solid darkgray",
+        border: "1px solid rgb(232, 232, 232)",
         padding: "0px 20px",
         borderRadius: "4px"
       }}

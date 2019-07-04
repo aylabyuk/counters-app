@@ -1,6 +1,7 @@
 import React from "react";
 
 import CreateCounter from "./CreateCounter";
+import CounterList from "./CounterList/CounterList";
 import Total from "./Total";
 
 const CounterContainer = () => {
@@ -18,7 +19,7 @@ const CounterContainer = () => {
       }}
     >
       <CreateCounter />
-      <div>Counter List</div>
+      <CounterList />
       <Total />
     </div>
   );
