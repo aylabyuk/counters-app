@@ -7,7 +7,7 @@ const CounterList = () => {
     <div
       style={{
         width: "100%",
-        fontSize: "3em",
+        fontSize: "1em",
         border: "1px solid rgb(232, 232, 232)",
         padding: "0px 20px",
         borderRadius: "4px",
