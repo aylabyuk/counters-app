@@ -9,23 +9,16 @@ const CounterList = () => {
         width: "100%",
         fontSize: "1em",
         border: "1px solid rgb(232, 232, 232)",
-        padding: "0px 20px",
         borderRadius: "4px",
         maxHeight: "100%",
         overflowY: "scroll",
         margin: "5px 0px"
       }}
     >
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
+      <Counter count={5} />
+      <Counter count={10} />
+      <Counter count={100} />
+      <Counter count={1000} />
     </div>
   );
 };
