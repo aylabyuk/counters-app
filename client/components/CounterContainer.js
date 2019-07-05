@@ -11,6 +11,12 @@ const CounterContainer = props => {
     props.onGetCounters();
   }, []);
 
+  let totalCounts =
+    props.counters.length > 0 &&
+    props.counters.reduce((a, b) => {
+      return { count: a.count + b.count };
+    }).count;
+
   return (
     <div
       style={{
@@ -29,7 +35,7 @@ const CounterContainer = props => {
         createCounter={props.onAddCounter}
       />
       <CounterList counters={props.counters} />
-      <Total />
+      <Total total={totalCounts || 0} />
     </div>
   );
 };

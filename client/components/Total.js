@@ -1,7 +1,7 @@
 import React from "react";
-import { Typography } from "antd";
+import { Badge } from "antd";
 
-const CounterContainer = () => {
+const CounterContainer = props => {
   return (
     <div
       style={{
@@ -18,7 +18,16 @@ const CounterContainer = () => {
       }}
     >
       <span>Total</span>
-      <span>10</span>
+      <Badge
+        showZero
+        overflowCount={10000}
+        count={props.total}
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          color: "#535355",
+          fontSize: "large"
+        }}
+      />
     </div>
   );
 };
