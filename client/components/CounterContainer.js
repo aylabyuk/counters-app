@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import CreateCounter from "./CreateCounter";
 import CounterList from "./CounterList/CounterList";
 import Total from "./Total";
+import { addCounter } from "../features/counter/actions";
 
 const CounterContainer = props => {
-  console.log(props);
   return (
     <div
       style={{
@@ -33,4 +33,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CounterContainer);
+const mapActionsToProps = {
+  onAddCounter: addCounter
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(CounterContainer);
