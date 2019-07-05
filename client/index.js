@@ -11,7 +11,7 @@ import App from "./components/App";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 //epics
-import { fetchCountersEpic } from "./features/counter/epics";
+import counterEpics from "./features/counter/epics";
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -20,7 +20,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(epicMiddleware))
 );
 
-epicMiddleware.run(fetchCountersEpic);
+epicMiddleware.run(counterEpics);
 
 ReactDOM.render(
   <Provider store={store}>

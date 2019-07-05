@@ -15,9 +15,31 @@ const CounterList = props => {
         margin: "5px 0px"
       }}
     >
-      {props.counters.map(counter => {
-        return <Counter title={counter.title} count={counter.count} />;
-      })}
+      {props.counters.length > 0 ? (
+        props.counters
+          .slice(0)
+          .reverse()
+          .map(counter => {
+            return (
+              <Counter
+                key={counter.id}
+                title={counter.title}
+                count={counter.count}
+              />
+            );
+          })
+      ) : (
+        <div
+          style={{
+            color: "gray",
+            textAlign: "center",
+            padding: "30px"
+          }}
+        >
+          Hi there, There are no counters available. You might want to create
+          one.
+        </div>
+      )}
     </div>
   );
 };

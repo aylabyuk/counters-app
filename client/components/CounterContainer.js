@@ -24,7 +24,7 @@ const CounterContainer = props => {
         padding: "50px"
       }}
     >
-      <CreateCounter />
+      <CreateCounter createCounter={props.onAddCounter} />
       <CounterList counters={props.counters} />
       <Total />
     </div>
