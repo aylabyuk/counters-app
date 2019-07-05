@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 import {
   deleteCounter,
-  incrementCounter
+  incrementCounter,
+  decrementCounter
 } from "../../features/counter/actions";
 
 const Counter = props => {
@@ -14,6 +15,10 @@ const Counter = props => {
 
   const handleIncrement = () => {
     props.onIncrementCounter(props.id);
+  };
+
+  const handleDecrement = () => {
+    props.onDecrementCounter(props.id);
   };
 
   return (
@@ -46,12 +51,13 @@ const Counter = props => {
           alignItems: "center"
         }}
       >
-        <Badge count={0}>
+        <Badge count={props.awaitingDecrement}>
           <Button
             disabled={props.forDeletion}
             type="dashed"
             shape="circle-outline"
             icon="down"
+            onClick={handleDecrement}
           />
         </Badge>
         <span style={{ margin: "0px 3px" }}>{props.count}</span>
@@ -77,15 +83,20 @@ const mapStateToProps = (state, ownProps) => {
   const awaitingIncrement =
     (state.awaiting[indexOfItem] && state.awaiting[indexOfItem].increment) || 0;
 
+  const awaitingDecrement =
+    (state.awaiting[indexOfItem] && state.awaiting[indexOfItem].decrement) || 0;
+
   return {
     forDeletion,
-    awaitingIncrement
+    awaitingIncrement,
+    awaitingDecrement
   };
 };
 
 const mapActionsToProps = {
   onDeleteCounter: deleteCounter,
-  onIncrementCounter: incrementCounter
+  onIncrementCounter: incrementCounter,
+  onDecrementCounter: decrementCounter
 };
 
 export default connect(

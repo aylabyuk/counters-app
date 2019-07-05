@@ -8,7 +8,8 @@ import {
   DELETE_COUNTER,
   DELETE_COUNTER_FAILED,
   DELETE_COUNTER_SUCCESS,
-  INCREMENT_COUNTER
+  INCREMENT_COUNTER,
+  DECREMENT_COUNTER
 } from "./actions";
 
 export const initialState = {
@@ -32,6 +33,24 @@ const removeFromList = (state, toRemove) => {
       )
     ]
   };
+};
+
+const setAwaiting = (state, type, id) => {
+  const indexOfItem = state.awaiting.findIndex(item => item.id === id);
+
+  let newAwaiting = [...state.awaiting];
+
+  if (indexOfItem < 0) {
+    newAwaiting.push({
+      id,
+      increment: type === "increment" ? 1 : 0,
+      decrement: type === "decrement" ? 1 : 0
+    });
+  } else {
+    newAwaiting[indexOfItem][type] += 1;
+  }
+
+  return newAwaiting;
 };
 
 const counterReducer = (state = initialState, action) => {
@@ -84,21 +103,16 @@ const counterReducer = (state = initialState, action) => {
 
     /// Incrementing a counter
     case INCREMENT_COUNTER:
-      const indexOfItem = state.awaiting.findIndex(
-        item => item.id === action.payload
-      );
-
-      let newAwaiting = [...state.awaiting];
-
-      if (indexOfItem < 0) {
-        newAwaiting.push({ id: action.payload, increment: 1 });
-      } else {
-        newAwaiting[indexOfItem].increment += 1;
-      }
-
       return {
         ...state,
-        awaiting: newAwaiting
+        awaiting: setAwaiting(state, "increment", action.payload)
+      };
+
+    /// Decrementing a counter
+    case DECREMENT_COUNTER:
+      return {
+        ...state,
+        awaiting: setAwaiting(state, "decrement", action.payload)
       };
 
     // default case
