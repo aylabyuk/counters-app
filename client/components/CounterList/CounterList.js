@@ -36,7 +36,7 @@ const CounterList = props => {
             padding: "30px"
           }}
         >
-          Hi there, There are no counters available. You might want to create
+          Hi there! There are no counters available. You might want to create
           one.
         </div>
       )}
