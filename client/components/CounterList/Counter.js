@@ -54,7 +54,7 @@ const Counter = props => {
         }}
       >
         <Badge
-          count={props.awaitingDecrement}
+          count={-props.awaitingDecrement}
           style={{ backgroundColor: "#e44d5f", color: "white" }}
         >
           <Button
@@ -77,7 +77,7 @@ const Counter = props => {
           />
         </span>
         <Badge
-          count={props.awaitingIncrement}
+          count={+props.awaitingIncrement}
           style={{ backgroundColor: "#5eacff", color: "white" }}
         >
           <Button
