@@ -24,6 +24,7 @@ const AddCounter = props => {
       />
       <Button
         disabled={title === ""}
+        loading={props.submitting}
         style={{ marginLeft: "5px" }}
         size="default"
         type="primary"

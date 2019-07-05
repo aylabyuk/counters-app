@@ -22,7 +22,6 @@ const removeFromList = (state, toRemove) => {
 
   return {
     ...state,
-    counters: toRemove,
     countersToDelete: [
       ...state.countersToDelete.slice(0, indexOfItem),
       ...state.countersToDelete.slice(
@@ -75,6 +74,7 @@ const counterReducer = (state = initialState, action) => {
       };
 
     case DELETE_COUNTER_FAILED:
+      console.log("err:", action);
       return {
         ...removeFromList(state, action.payload.id)
       };
