@@ -35,6 +35,15 @@ const removeFromList = (state, toRemove) => {
   };
 };
 
+const removeItemFromAwaiting = (state, id) => {
+  const indexOfItem = state.awaiting.findIndex(item => item.id === id);
+
+  return [
+    ...state.awaiting.slice(0, indexOfItem),
+    ...state.awaiting.slice(indexOfItem + 1, state.awaiting.length)
+  ];
+};
+
 const setAwaiting = (state, type, id) => {
   const indexOfItem = state.awaiting.findIndex(item => item.id === id);
 
@@ -91,7 +100,8 @@ const counterReducer = (state = initialState, action) => {
     case DELETE_COUNTER_SUCCESS:
       return {
         ...removeFromList(state, action.payload.id),
-        counters: action.payload.counters
+        counters: action.payload.counters,
+        awaiting: removeItemFromAwaiting(state, action.payload.id)
       };
 
     case DELETE_COUNTER_FAILED:
