@@ -21,6 +21,7 @@ const AddCounter = props => {
         placeholder="New Counter"
         onChange={handleChangeTitle}
         value={title}
+        disabled={props.submitting}
       />
       <Button
         disabled={title === ""}

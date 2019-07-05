@@ -81,15 +81,14 @@ const deleteCounterEpic = action$ =>
         }
       });
     }),
-    catchError(err =>
-      Promise.resolve({
+    catchError(err => {
+      return Promise.resolve({
         type: DELETE_COUNTER_FAILED,
         payload: {
-          id: action.payload.id,
           message: err.message
         }
-      })
-    )
+      });
+    })
   );
 
 export default combineEpics(

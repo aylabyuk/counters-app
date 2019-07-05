@@ -18,6 +18,7 @@ export const initialState = {
 };
 
 const removeFromList = (state, toRemove) => {
+  console.log("removing", toRemove);
   const indexOfItem = state.countersToDelete.indexOf(toRemove);
 
   return {
@@ -76,7 +77,8 @@ const counterReducer = (state = initialState, action) => {
     case DELETE_COUNTER_FAILED:
       console.log("err:", action);
       return {
-        ...removeFromList(state, action.payload.id)
+        ...state,
+        countersToDelete: []
       };
 
     // default case
