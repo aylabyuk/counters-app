@@ -2,7 +2,7 @@ import React from "react";
 
 import Counter from "./Counter";
 
-const CounterList = () => {
+const CounterList = props => {
   return (
     <div
       style={{
@@ -15,10 +15,9 @@ const CounterList = () => {
         margin: "5px 0px"
       }}
     >
-      <Counter count={5} />
-      <Counter count={10} />
-      <Counter count={100} />
-      <Counter count={1000} />
+      {props.counters.map(counter => {
+        return <Counter title={counter.title} count={counter.count} />;
+      })}
     </div>
   );
 };

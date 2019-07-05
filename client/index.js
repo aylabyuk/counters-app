@@ -8,18 +8,19 @@ import { createEpicMiddleware } from "redux-observable";
 import counterReducer from "./features/counter/reducers";
 import App from "./components/App";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 //epics
 import { fetchCountersEpic } from "./features/counter/epics";
 
-const observableMiddleware = createEpicMiddleware(fetchCountersEpic);
+const epicMiddleware = createEpicMiddleware();
 
 const store = createStore(
   counterReducer,
-  compose(
-    applyMiddleware(observableMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  composeEnhancers(applyMiddleware(epicMiddleware))
 );
+
+epicMiddleware.run(fetchCountersEpic);
 
 ReactDOM.render(
   <Provider store={store}>

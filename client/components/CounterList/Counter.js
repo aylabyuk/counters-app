@@ -20,7 +20,7 @@ const Counter = props => {
           shape="circle-outline"
           icon="delete"
         />
-        <span>TestCounter</span>
+        <span>{props.title}</span>
       </div>
       <div
         style={{

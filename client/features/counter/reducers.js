@@ -1,4 +1,9 @@
-import { ADD_COUNTER, SET_COUNTERS, GET_COUNTERS } from "./actions";
+import {
+  ADD_COUNTER,
+  GET_COUNTERS_SUCCESS,
+  GET_COUNTERS,
+  GET_COUNTERS_FAILED
+} from "./actions";
 
 const initialState = {
   isFetchingCounters: false,
@@ -11,12 +16,15 @@ const counterReducer = (state = initialState, action) => {
       return state;
     case GET_COUNTERS:
       return { ...state, isFetchingCounters: true };
-    case SET_COUNTERS:
+    case GET_COUNTERS_SUCCESS:
       return {
         ...state,
         isFetchingCounters: false,
         counters: action.payload
       };
+    case GET_COUNTERS_FAILED:
+      console.log("err:", action);
+      return { ...state, isFetchingCounters: false };
     default:
       return state;
   }

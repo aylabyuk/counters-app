@@ -1,11 +1,13 @@
 var express = require("express");
 var app = express();
+var cors = require("cors");
 var bodyParser = require("body-parser");
 var compression = require("compression");
 var morgan = require("morgan");
 var PORT = Number(process.env.PORT || 3000);
 var Counters = require("./lib/Counters");
 
+app.use(cors());
 app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import CreateCounter from "./CreateCounter";
 import CounterList from "./CounterList/CounterList";
 import Total from "./Total";
-import { addCounter } from "../features/counter/actions";
+import { addCounter, getCounters } from "../features/counter/actions";
 
 const CounterContainer = props => {
+  useEffect(() => {
+    props.onGetCounters();
+  }, []);
+
   return (
     <div
       style={{
@@ -21,20 +25,19 @@ const CounterContainer = props => {
       }}
     >
       <CreateCounter />
-      <CounterList />
+      <CounterList counters={props.counters} />
       <Total />
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  return {
-    counters: state
-  };
+  return state;
 };
 
 const mapActionsToProps = {
-  onAddCounter: addCounter
+  onAddCounter: addCounter,
+  onGetCounters: getCounters
 };
 
 export default connect(
