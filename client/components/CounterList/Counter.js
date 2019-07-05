@@ -1,7 +1,14 @@
 import React from "react";
 import { Button } from "antd";
+import { connect } from "react-redux";
+
+import { deleteCounter } from "../../features/counter/actions";
 
 const Counter = props => {
+  const handleDelete = e => {
+    props.onDeleteCounter(props.id);
+  };
+
   return (
     <div
       style={{
@@ -19,6 +26,8 @@ const Counter = props => {
           type="danger"
           shape="circle-outline"
           icon="delete"
+          onClick={handleDelete}
+          loading={props.forDeletion}
         />
         <span>{props.title}</span>
       </div>
@@ -30,12 +39,37 @@ const Counter = props => {
           alignItems: "center"
         }}
       >
-        <Button type="dashed" shape="circle-outline" icon="down" />
+        <Button
+          disabled={props.forDeletion}
+          type="dashed"
+          shape="circle-outline"
+          icon="down"
+        />
         <span style={{ margin: "0px 3px" }}>{props.count}</span>
-        <Button type="dashed" shape="circle-outline" icon="up" />
+        <Button
+          disabled={props.forDeletion}
+          type="dashed"
+          shape="circle-outline"
+          icon="up"
+        />
       </div>
     </div>
   );
 };
 
-export default Counter;
+const mapStateToProps = (state, ownProps) => {
+  const forDeletion = state.countersToDelete.includes(ownProps.id);
+
+  return {
+    forDeletion
+  };
+};
+
+const mapActionsToProps = {
+  onDeleteCounter: deleteCounter
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(Counter);

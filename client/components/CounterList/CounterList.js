@@ -20,13 +20,7 @@ const CounterList = props => {
           .slice(0)
           .reverse()
           .map(counter => {
-            return (
-              <Counter
-                key={counter.id}
-                title={counter.title}
-                count={counter.count}
-              />
-            );
+            return <Counter key={counter.id} {...counter} />;
           })
       ) : (
         <div

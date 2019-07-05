@@ -4,13 +4,33 @@ import {
   GET_COUNTERS,
   GET_COUNTERS_FAILED,
   ADD_COUNTER_FAILED,
-  ADD_COUNTER_SUCCESS
+  ADD_COUNTER_SUCCESS,
+  DELETE_COUNTER,
+  DELETE_COUNTER_FAILED,
+  DELETE_COUNTER_SUCCESS
 } from "./actions";
 
-const initialState = {
+export const initialState = {
   isFetchingCounters: false,
   isCreatingCounter: false,
-  counters: []
+  counters: [],
+  countersToDelete: []
+};
+
+const removeFromList = (state, toRemove) => {
+  const indexOfItem = state.countersToDelete.indexOf(toRemove);
+
+  return {
+    ...state,
+    counters: toRemove,
+    countersToDelete: [
+      ...state.countersToDelete.slice(0, indexOfItem),
+      ...state.countersToDelete.slice(
+        indexOfItem + 1,
+        state.countersToDelete.length
+      )
+    ]
+  };
 };
 
 const counterReducer = (state = initialState, action) => {
@@ -40,6 +60,24 @@ const counterReducer = (state = initialState, action) => {
     case ADD_COUNTER_FAILED:
       console.log("err:", action);
       return { ...state, isCreatingCounter: false };
+
+    // Deleting a counter
+    case DELETE_COUNTER:
+      return {
+        ...state,
+        countersToDelete: [...state.countersToDelete, action.payload]
+      };
+
+    case DELETE_COUNTER_SUCCESS:
+      return {
+        ...removeFromList(state, action.payload.id),
+        counters: action.payload.counters
+      };
+
+    case DELETE_COUNTER_FAILED:
+      return {
+        ...removeFromList(state, action.payload.id)
+      };
 
     // default case
     default:
