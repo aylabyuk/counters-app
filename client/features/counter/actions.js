@@ -10,6 +10,9 @@ export const DELETE_COUNTER_SUCCESS = "DELETE_COUNTER_SUCCESS";
 export const DELETE_COUNTER_FAILED = "DELETE_COUNTER_FAILED";
 export const DELETE_COUNTER = "DELETE_COUNTER";
 
+export const INCREMENT_COUNTER = "INCREMENT_COUNTER";
+export const DECREMENT_COUNTER = "DECREMENT_COUNTER";
+
 export const getCounters = () => {
   return {
     type: GET_COUNTERS
@@ -26,6 +29,20 @@ export const addCounter = newCounter => {
 export const deleteCounter = id => {
   return {
     type: DELETE_COUNTER,
+    payload: id
+  };
+};
+
+export const incrementCounter = id => {
+  return {
+    type: INCREMENT_COUNTER,
+    payload: id
+  };
+};
+
+export const decrementCounter = id => {
+  return {
+    type: DECREMENT_COUNTER,
     payload: id
   };
 };

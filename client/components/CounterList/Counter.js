@@ -1,12 +1,19 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Badge } from "antd";
 import { connect } from "react-redux";
 
-import { deleteCounter } from "../../features/counter/actions";
+import {
+  deleteCounter,
+  incrementCounter
+} from "../../features/counter/actions";
 
 const Counter = props => {
-  const handleDelete = e => {
+  const handleDelete = () => {
     props.onDeleteCounter(props.id);
+  };
+
+  const handleIncrement = () => {
+    props.onIncrementCounter(props.id);
   };
 
   return (
@@ -14,7 +21,7 @@ const Counter = props => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        padding: "5px",
+        padding: "13px 5px",
         borderBottom: "1px solid rgb(232, 232, 232)"
       }}
     >
@@ -34,24 +41,29 @@ const Counter = props => {
       <div
         style={{
           display: "flex",
-          width: "100px",
+          width: "135px",
           justifyContent: "space-around",
           alignItems: "center"
         }}
       >
-        <Button
-          disabled={props.forDeletion}
-          type="dashed"
-          shape="circle-outline"
-          icon="down"
-        />
+        <Badge count={0}>
+          <Button
+            disabled={props.forDeletion}
+            type="dashed"
+            shape="circle-outline"
+            icon="down"
+          />
+        </Badge>
         <span style={{ margin: "0px 3px" }}>{props.count}</span>
-        <Button
-          disabled={props.forDeletion}
-          type="dashed"
-          shape="circle-outline"
-          icon="up"
-        />
+        <Badge count={props.awaitingIncrement}>
+          <Button
+            disabled={props.forDeletion}
+            type="dashed"
+            shape="circle-outline"
+            icon="up"
+            onClick={handleIncrement}
+          />
+        </Badge>
       </div>
     </div>
   );
@@ -60,13 +72,20 @@ const Counter = props => {
 const mapStateToProps = (state, ownProps) => {
   const forDeletion = state.countersToDelete.includes(ownProps.id);
 
+  const indexOfItem = state.awaiting.findIndex(item => item.id === ownProps.id);
+
+  const awaitingIncrement =
+    (state.awaiting[indexOfItem] && state.awaiting[indexOfItem].increment) || 0;
+
   return {
-    forDeletion
+    forDeletion,
+    awaitingIncrement
   };
 };
 
 const mapActionsToProps = {
-  onDeleteCounter: deleteCounter
+  onDeleteCounter: deleteCounter,
+  onIncrementCounter: incrementCounter
 };
 
 export default connect(

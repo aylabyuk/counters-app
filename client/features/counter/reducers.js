@@ -7,18 +7,19 @@ import {
   ADD_COUNTER_SUCCESS,
   DELETE_COUNTER,
   DELETE_COUNTER_FAILED,
-  DELETE_COUNTER_SUCCESS
+  DELETE_COUNTER_SUCCESS,
+  INCREMENT_COUNTER
 } from "./actions";
 
 export const initialState = {
   isFetchingCounters: false,
   isCreatingCounter: false,
   counters: [],
-  countersToDelete: []
+  countersToDelete: [],
+  awaiting: []
 };
 
 const removeFromList = (state, toRemove) => {
-  console.log("removing", toRemove);
   const indexOfItem = state.countersToDelete.indexOf(toRemove);
 
   return {
@@ -61,7 +62,7 @@ const counterReducer = (state = initialState, action) => {
       console.log("err:", action);
       return { ...state, isCreatingCounter: false };
 
-    // Deleting a counter
+    /// Deleting a counter
     case DELETE_COUNTER:
       return {
         ...state,
@@ -79,6 +80,25 @@ const counterReducer = (state = initialState, action) => {
       return {
         ...state,
         countersToDelete: []
+      };
+
+    /// Incrementing a counter
+    case INCREMENT_COUNTER:
+      const indexOfItem = state.awaiting.findIndex(
+        item => item.id === action.payload
+      );
+
+      let newAwaiting = [...state.awaiting];
+
+      if (indexOfItem < 0) {
+        newAwaiting.push({ id: action.payload, increment: 1 });
+      } else {
+        newAwaiting[indexOfItem].increment += 1;
+      }
+
+      return {
+        ...state,
+        awaiting: newAwaiting
       };
 
     // default case
