@@ -9,6 +9,7 @@ import {
   DELETE_COUNTER_FAILED,
   DELETE_COUNTER_SUCCESS,
   INCREMENT_COUNTER,
+  INCREMENT_COUNTER_SUCCESS,
   DECREMENT_COUNTER
 } from "./actions";
 
@@ -42,6 +43,16 @@ const removeItemFromAwaiting = (state, id) => {
     ...state.awaiting.slice(0, indexOfItem),
     ...state.awaiting.slice(indexOfItem + 1, state.awaiting.length)
   ];
+};
+
+const subtractAwaiting = (state, type, id) => {
+  const indexOfItem = state.awaiting.findIndex(item => item.id === id);
+
+  let newAwaiting = [...state.awaiting];
+
+  newAwaiting[indexOfItem][type] -= 1;
+
+  return newAwaiting;
 };
 
 const setAwaiting = (state, type, id) => {
@@ -116,6 +127,13 @@ const counterReducer = (state = initialState, action) => {
       return {
         ...state,
         awaiting: setAwaiting(state, "increment", action.payload)
+      };
+
+    case INCREMENT_COUNTER_SUCCESS:
+      return {
+        ...state,
+        counters: action.payload.counters,
+        awaiting: subtractAwaiting(state, "increment", action.payload.id)
       };
 
     /// Decrementing a counter

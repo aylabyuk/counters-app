@@ -9,7 +9,9 @@ import {
   ADD_COUNTER_FAILED,
   DELETE_COUNTER,
   DELETE_COUNTER_SUCCESS,
-  DELETE_COUNTER_FAILED
+  DELETE_COUNTER_FAILED,
+  INCREMENT_COUNTER,
+  INCREMENT_COUNTER_SUCCESS
 } from "../counter/actions";
 
 import { combineEpics } from "redux-observable";
@@ -91,8 +93,35 @@ const deleteCounterEpic = action$ =>
     })
   );
 
+const increaseCounterEpic = action$ =>
+  action$.pipe(
+    filter(action => action.type === INCREMENT_COUNTER),
+    mergeMap(async action => {
+      const url = "http://localhost:3000/api/v1/counter/inc";
+
+      const counters = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: action.payload
+        })
+      }).then(res => res.json());
+
+      return Object.assign({}, action, {
+        type: INCREMENT_COUNTER_SUCCESS,
+        payload: {
+          id: action.payload,
+          counters
+        }
+      });
+    })
+  );
+
 export default combineEpics(
   fetchCountersEpic,
   addCounterEpic,
-  deleteCounterEpic
+  deleteCounterEpic,
+  increaseCounterEpic
 );
