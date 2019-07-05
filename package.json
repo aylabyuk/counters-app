@@ -7,7 +7,9 @@
     "start": "node index.js",
     "dev": "webpack-dev-server --open",
     "build": "webpack",
-    "clean": "rimraf static"
+    "clean": "rimraf static",
+    "test": "jest",
+    "test:watch": "yarn test -- --watch --coverage"
   },
   "keywords": [
     "front-end test"
@@ -41,6 +43,9 @@
     "babel-loader": "^8.0.6",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^3.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-react": "^7.14.2",

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateCounter /> Renders correctly 1`] = `
+<Form
+  colon={true}
+  hideRequiredMark={false}
+  layout="horizontal"
+  onSubmit={[Function]}
+  style={
+    Object {
+      "display": "flex",
+      "width": "100%",
+    }
+  }
+>
+  <Input
+    disabled={false}
+    onChange={[Function]}
+    placeholder="New Counter"
+    size="default"
+    type="text"
+    value=""
+  />
+  <Button
+    block={false}
+    disabled={true}
+    ghost={false}
+    htmlType="submit"
+    icon="plus"
+    loading={false}
+    size="default"
+    style={
+      Object {
+        "marginLeft": "5px",
+      }
+    }
+    type="primary"
+  >
+    Add
+  </Button>
+</Form>
+`;
