@@ -8,7 +8,10 @@ import { createEpicMiddleware } from "redux-observable";
 import counterReducer from "./features/counter/reducers";
 import App from "./components/App";
 
-const observableMiddleware = createEpicMiddleware();
+//epics
+import { fetchCountersEpic } from "./features/counter/epics";
+
+const observableMiddleware = createEpicMiddleware(fetchCountersEpic);
 
 const store = createStore(
   counterReducer,
