@@ -33,7 +33,9 @@ const Counter = props => {
       <div>
         <Button
           style={{
-            marginRight: "5px"
+            marginRight: "25px",
+            color: "#535355",
+            fontSize: "large"
           }}
           type="danger"
           shape="circle-outline"
@@ -51,7 +53,10 @@ const Counter = props => {
           alignItems: "center"
         }}
       >
-        <Badge count={props.awaitingDecrement}>
+        <Badge
+          count={props.awaitingDecrement}
+          style={{ backgroundColor: "#e44d5f", color: "white" }}
+        >
           <Button
             disabled={props.forDeletion}
             type="dashed"
@@ -60,8 +65,21 @@ const Counter = props => {
             onClick={handleDecrement}
           />
         </Badge>
-        <span style={{ margin: "0px 3px" }}>{props.count}</span>
-        <Badge count={props.awaitingIncrement}>
+        <span style={{ margin: "0px 3px" }}>
+          <Badge
+            showZero
+            count={props.count}
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0)",
+              color: "#535355",
+              fontSize: "large"
+            }}
+          />
+        </span>
+        <Badge
+          count={props.awaitingIncrement}
+          style={{ backgroundColor: "#5eacff", color: "white" }}
+        >
           <Button
             disabled={props.forDeletion}
             type="dashed"
