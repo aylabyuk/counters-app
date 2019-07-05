@@ -8,7 +8,7 @@ const App = () => {
     <Layout style={{ height: "100vh" }}>
       <Layout.Header style={{ textAlign: "center", padding: "10px" }}>
         <Typography.Title style={{ color: "#fff" }} level={2}>
-          Counter App
+          counter app
         </Typography.Title>
       </Layout.Header>
       <Layout.Content style={{ flex: "1 1 auto" }}>
