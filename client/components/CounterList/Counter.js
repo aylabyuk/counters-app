@@ -68,6 +68,7 @@ const Counter = props => {
         <span style={{ margin: "0px 3px" }}>
           <Badge
             showZero
+            overflowCount={10000}
             count={props.count}
             style={{
               backgroundColor: "rgba(255, 255, 255, 0)",

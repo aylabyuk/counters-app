@@ -10,7 +10,8 @@ import {
   DELETE_COUNTER_SUCCESS,
   INCREMENT_COUNTER,
   INCREMENT_COUNTER_SUCCESS,
-  DECREMENT_COUNTER
+  DECREMENT_COUNTER,
+  DECREMENT_COUNTER_SUCCESS
 } from "./actions";
 
 export const initialState = {
@@ -141,6 +142,13 @@ const counterReducer = (state = initialState, action) => {
       return {
         ...state,
         awaiting: setAwaiting(state, "decrement", action.payload)
+      };
+
+    case DECREMENT_COUNTER_SUCCESS:
+      return {
+        ...state,
+        counters: action.payload.counters,
+        awaiting: subtractAwaiting(state, "decrement", action.payload.id)
       };
 
     // default case

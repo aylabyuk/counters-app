@@ -12,6 +12,7 @@ const CounterList = props => {
         borderRadius: "4px",
         maxHeight: "100%",
         overflowY: "scroll",
+        overflowX: "hidden",
         margin: "5px 0px"
       }}
     >
