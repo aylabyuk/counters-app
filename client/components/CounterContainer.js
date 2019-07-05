@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import CreateCounter from "./CreateCounter";
 import CounterList from "./CounterList/CounterList";
 import Total from "./Total";
 
-const CounterContainer = () => {
+const CounterContainer = props => {
+  console.log(props);
   return (
     <div
       style={{
@@ -25,4 +27,10 @@ const CounterContainer = () => {
   );
 };
 
-export default CounterContainer;
+const mapStateToProps = state => {
+  return {
+    counters: state
+  };
+};
+
+export default connect(mapStateToProps)(CounterContainer);
