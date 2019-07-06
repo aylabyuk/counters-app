@@ -31,14 +31,14 @@ const StyledCountingSection = styled.div`
 
 const StyledBadge = styled(Badge)`
   .ant-badge-count {
-    background-color: ${props => props.bgColor || "red"};
-    color: ${props => (props.isMainCount ? "#535355" : "white")};
-    font-size: ${props => (props.isMainCount ? "large" : "small")};
+    background-color: ${props => props.bgcolor || "red"};
+    color: ${props => (props.ismaincount ? "#535355" : "white")};
+    font-size: ${props => (props.ismaincount ? "large" : "small")};
   }
 `;
 
-const IncDecButton = ({ count, disabled, bgColor, onClick, icon }) => (
-  <StyledBadge count={count} bgColor={bgColor}>
+const IncDecButton = ({ count, disabled, bgcolor, onClick, icon }) => (
+  <StyledBadge count={count} bgcolor={bgcolor}>
     <Button
       disabled={disabled}
       type="dashed"
@@ -51,7 +51,7 @@ const IncDecButton = ({ count, disabled, bgColor, onClick, icon }) => (
 
 const StyledIncDecButton = styled(IncDecButton)`
   .ant-badge sup {
-    background-color: ${props => props.bgColor || "white"};
+    background-color: ${props => props.bgcolor || "white"};
     color: white;
   }
 `;
@@ -84,7 +84,7 @@ const Counter = props => {
       <StyledCountingSection>
         <StyledIncDecButton
           count={-props.awaitingDecrement}
-          bgColor="#e44d5f"
+          bgcolor="#e44d5f"
           disabled={props.forDeletion}
           onClick={handleDecrement}
           icon="down"
@@ -94,13 +94,13 @@ const Counter = props => {
             showZero
             overflowCount={10000}
             count={props.count}
-            bgColor="rgba(255, 255, 255, 0)"
-            isMainCount
+            bgcolor="rgba(255, 255, 255, 0)"
+            ismaincount="true"
           />
         </span>
         <StyledIncDecButton
           count={+props.awaitingIncrement}
-          bgColor="#5eacff"
+          bgcolor="#5eacff"
           disabled={props.forDeletion}
           onClick={handleIncrement}
           icon="up"
