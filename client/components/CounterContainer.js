@@ -1,10 +1,22 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 import CreateCounter from "./CreateCounter";
 import CounterList from "./CounterList/CounterList";
 import Total from "./Total";
 import { addCounter, getCounters } from "../features/counter/actions";
+
+const StyledRoot = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 500px;
+  margin: auto;
+  padding: 50px;
+`;
 
 const CounterContainer = props => {
   useEffect(() => {
@@ -18,25 +30,14 @@ const CounterContainer = props => {
     }).count;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100%",
-        width: "500px",
-        margin: "auto",
-        padding: "50px"
-      }}
-    >
+    <StyledRoot>
       <CreateCounter
         submitting={props.isCreatingCounter}
         createCounter={props.onAddCounter}
       />
       <CounterList counters={props.counters} />
       <Total total={totalCounts || 0} />
-    </div>
+    </StyledRoot>
   );
 };
 
