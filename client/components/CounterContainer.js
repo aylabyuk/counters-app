@@ -28,6 +28,7 @@ const StyledContentContainer = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 5px 0px;
+  position: relative;
 
   ::-webkit-scrollbar-button {
     display: block;
@@ -82,12 +83,22 @@ const CounterContainer = props => {
 
   const pages = [
     ({ style }) => (
-      <animated.div style={style}>
+      <animated.div
+        style={{
+          ...style,
+          position: "absolute"
+        }}
+      >
         <CounterList counters={props.counters} />
       </animated.div>
     ),
     ({ style }) => (
-      <animated.div style={style}>
+      <animated.div
+        style={{
+          ...style,
+          position: "absolute"
+        }}
+      >
         <StyledMessage>
           Hi there! There are no counters available. You might want to create
           one.
