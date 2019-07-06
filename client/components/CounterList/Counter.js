@@ -1,12 +1,60 @@
 import React from "react";
 import { Button, Badge } from "antd";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 import {
   deleteCounter,
   incrementCounter,
   decrementCounter
 } from "../../features/counter/actions";
+
+const StyledRoot = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 15px;
+  border-bottom: 1px solid rgb(232, 232, 232);
+`;
+
+const StyledDeleteButton = styled(Button)`
+  margin-right: 25px;
+  color: #535355;
+  font-size: large;
+`;
+
+const StyledCountingSection = styled.div`
+  display: flex;
+  width: 135px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledBadge = styled(Badge)`
+  .ant-badge-count {
+    background-color: ${props => props.bgColor || "red"};
+    color: ${props => (props.isMainCount ? "#535355" : "white")};
+    font-size: ${props => (props.isMainCount ? "large" : "small")};
+  }
+`;
+
+const IncDecButton = ({ count, disabled, bgColor, onClick, icon }) => (
+  <StyledBadge count={count} bgColor={bgColor}>
+    <Button
+      disabled={disabled}
+      type="dashed"
+      shape="circle-outline"
+      icon={icon}
+      onClick={onClick}
+    />
+  </StyledBadge>
+);
+
+const StyledIncDecButton = styled(IncDecButton)`
+  .ant-badge sup {
+    background-color: ${props => props.bgColor || "white"};
+    color: white;
+  }
+`;
 
 const Counter = props => {
   const handleDelete = () => {
@@ -22,21 +70,9 @@ const Counter = props => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "13px 5px",
-        borderBottom: "1px solid rgb(232, 232, 232)"
-      }}
-    >
+    <StyledRoot>
       <div>
-        <Button
-          style={{
-            marginRight: "25px",
-            color: "#535355",
-            fontSize: "large"
-          }}
+        <StyledDeleteButton
           type="danger"
           shape="circle-outline"
           icon="delete"
@@ -45,52 +81,32 @@ const Counter = props => {
         />
         <span>{props.title}</span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          width: "135px",
-          justifyContent: "space-around",
-          alignItems: "center"
-        }}
-      >
-        <Badge
+      <StyledCountingSection>
+        <StyledIncDecButton
           count={-props.awaitingDecrement}
-          style={{ backgroundColor: "#e44d5f", color: "white" }}
-        >
-          <Button
-            disabled={props.forDeletion}
-            type="dashed"
-            shape="circle-outline"
-            icon="down"
-            onClick={handleDecrement}
-          />
-        </Badge>
+          bgColor="#e44d5f"
+          disabled={props.forDeletion}
+          onClick={handleDecrement}
+          icon="down"
+        />
         <span style={{ margin: "0px 3px" }}>
-          <Badge
+          <StyledBadge
             showZero
             overflowCount={10000}
             count={props.count}
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0)",
-              color: "#535355",
-              fontSize: "large"
-            }}
+            bgColor="rgba(255, 255, 255, 0)"
+            isMainCount
           />
         </span>
-        <Badge
+        <StyledIncDecButton
           count={+props.awaitingIncrement}
-          style={{ backgroundColor: "#5eacff", color: "white" }}
-        >
-          <Button
-            disabled={props.forDeletion}
-            type="dashed"
-            shape="circle-outline"
-            icon="up"
-            onClick={handleIncrement}
-          />
-        </Badge>
-      </div>
-    </div>
+          bgColor="#5eacff"
+          disabled={props.forDeletion}
+          onClick={handleIncrement}
+          icon="up"
+        />
+      </StyledCountingSection>
+    </StyledRoot>
   );
 };
 
