@@ -37,24 +37,26 @@ const StyledBadge = styled(Badge)`
   }
 `;
 
-const IncDecButton = ({ count, disabled, bgcolor, onClick, icon }) => (
+const StyledIncDecBtn = styled(Button)`
+  &:hover,
+  &:focus {
+    color: ${props => props.bgcolor || "#40a9ff"};
+    border-color: ${props => props.bgcolor || "#40a9ff"};
+  }
+`;
+
+const IncrementDecrement = ({ count, disabled, bgcolor, onClick, icon }) => (
   <StyledBadge count={count} bgcolor={bgcolor}>
-    <Button
+    <StyledIncDecBtn
       disabled={disabled}
       type="dashed"
       shape="circle-outline"
       icon={icon}
       onClick={onClick}
+      bgcolor={bgcolor}
     />
   </StyledBadge>
 );
-
-const StyledIncDecButton = styled(IncDecButton)`
-  .ant-badge sup {
-    background-color: ${props => props.bgcolor || "white"};
-    color: white;
-  }
-`;
 
 const Counter = props => {
   const handleDelete = () => {
@@ -82,7 +84,7 @@ const Counter = props => {
         <span>{props.title}</span>
       </div>
       <StyledCountingSection>
-        <StyledIncDecButton
+        <IncrementDecrement
           count={-props.awaitingDecrement}
           bgcolor="#e44d5f"
           disabled={props.forDeletion}
@@ -98,7 +100,7 @@ const Counter = props => {
             ismaincount="true"
           />
         </span>
-        <StyledIncDecButton
+        <IncrementDecrement
           count={+props.awaitingIncrement}
           bgcolor="#5eacff"
           disabled={props.forDeletion}
