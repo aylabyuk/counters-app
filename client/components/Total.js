@@ -25,7 +25,12 @@ const StyledBadge = styled(Badge)`
 const Total = props => {
   return (
     <StyledRoot>
-      <StyledBadge overflowCount={10000} count={props.total} />
+      <StyledBadge
+        showZero
+        title="total count"
+        overflowCount={10000}
+        count={props.total}
+      />
     </StyledRoot>
   );
 };

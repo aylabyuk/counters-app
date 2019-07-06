@@ -8,10 +8,35 @@ const StyledRoot = styled.div`
   font-size: 1em;
   border: 1px solid rgb(232, 232, 232);
   border-radius: 4px;
-  max-height: 100%;
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 5px 0px;
+
+  ::-webkit-scrollbar-button {
+    display: block;
+    height: 5px;
+    background-color: #aaa;
+  }
+  ::-webkit-scrollbar-button:hover {
+    background-color: #aaa;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #acacac;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #535353;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #efefef;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background-color: #ccc;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 `;
 
 const StyledMessage = styled.div`
