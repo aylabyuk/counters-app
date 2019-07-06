@@ -86,7 +86,8 @@ const CounterContainer = props => {
       <animated.div
         style={{
           ...style,
-          position: "absolute"
+          position: "absolute",
+          width: "inherit"
         }}
       >
         <CounterList counters={props.counters} />
